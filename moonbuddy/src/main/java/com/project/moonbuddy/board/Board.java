@@ -19,6 +19,7 @@ public class Board extends BaseTimeEntity {
     private Long id;
     private String title;
     private Long userSn;
+    private String userName;
     private String content;
 
 }
