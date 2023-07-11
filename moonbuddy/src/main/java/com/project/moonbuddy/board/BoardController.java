@@ -29,6 +29,12 @@ public class BoardController {
         this.userService = userService;
     }
 
+    @GetMapping("/viewAll")
+    public ResponseEntity viewAll(){
+        List<BoardResponse> boardList = boardService.selectAll();
+        return ResponseEntity.status(HttpStatus.OK).body(boardList);
+    }
+
     @PostMapping("/post")
     public ResponseEntity post(@RequestBody BoardWrite boardWrite){
         //SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
@@ -51,6 +57,11 @@ public class BoardController {
         return ResponseEntity.status(HttpStatus.OK).body(status);
     }
 
-
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/view/{id}")
+    public ResponseEntity view(@PathVariable("id") Long id){
+        BoardResponse boardResponse = boardService.select(id);
+        return ResponseEntity.status(HttpStatus.OK).body(boardResponse);
+    }
 
 }
