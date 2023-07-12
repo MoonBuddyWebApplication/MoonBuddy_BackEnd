@@ -23,6 +23,7 @@ public class IndexController {
 
     @GetMapping("/main")
     public String main(){
+
         return "main";
     }
 }
