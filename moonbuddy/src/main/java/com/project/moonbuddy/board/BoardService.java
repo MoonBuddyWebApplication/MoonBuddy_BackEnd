@@ -1,6 +1,7 @@
 package com.project.moonbuddy.board;
 
 import com.project.moonbuddy.board.dto.request.BoardWrite;
+import com.project.moonbuddy.board.dto.response.BoardResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

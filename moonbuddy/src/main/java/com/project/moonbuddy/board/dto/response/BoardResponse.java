@@ -1,4 +1,4 @@
-package com.project.moonbuddy.board;
+package com.project.moonbuddy.board.dto.response;
 
 import lombok.Builder;
 import lombok.Data;

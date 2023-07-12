@@ -1,21 +1,19 @@
 package com.project.moonbuddy.board;
 
 import com.project.moonbuddy.board.dto.request.BoardWrite;
-import com.project.moonbuddy.user.User;
+import com.project.moonbuddy.board.dto.response.BoardResponse;
 import com.project.moonbuddy.user.UserService;
-import com.project.moonbuddy.user.config.oauth.dto.SessionUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://172.16.65.251:3000")
 @RestController
 @RequestMapping("/board")
 public class BoardController {
@@ -23,6 +21,12 @@ public class BoardController {
 
     private final UserService userService;
     private HttpSession httpSession;
+
+    @GetMapping("/test")
+    public String main(){
+
+        return "test";
+    }
 
     @Autowired
     public BoardController(BoardService boardService, UserService userService) {
