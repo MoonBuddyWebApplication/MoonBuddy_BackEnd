@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/board")
 public class BoardController {
@@ -57,7 +58,7 @@ public class BoardController {
         return ResponseEntity.status(HttpStatus.OK).body(status);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @GetMapping("/view/{id}")
     public ResponseEntity view(@PathVariable("id") Long id){
         BoardResponse boardResponse = boardService.select(id);
