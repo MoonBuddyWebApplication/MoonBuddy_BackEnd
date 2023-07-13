@@ -7,6 +7,7 @@ import lombok.Data;
 @Builder
 public class BoardWrite {
     private String title;
+    private Long userId;
     private String writer;
     private String content;
 }

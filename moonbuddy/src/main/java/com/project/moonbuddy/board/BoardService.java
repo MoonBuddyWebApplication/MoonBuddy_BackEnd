@@ -1,5 +1,6 @@
 package com.project.moonbuddy.board;
 
+import com.project.moonbuddy.board.dto.ReplyDTO;
 import com.project.moonbuddy.board.dto.request.BoardWrite;
 import com.project.moonbuddy.board.dto.response.BoardResponse;
 import com.project.moonbuddy.user.User;
@@ -68,14 +69,18 @@ public class BoardService {
     public BoardResponse select(Long id) {
         Board board = boardRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("존재하지 않는 글입니다."));
-
+        List<ReplyDTO.Response> replylist = new ArrayList<>();
+        board.getReplyList().forEach(v->
+                replylist.add(new ReplyDTO.Response(v)));
         BoardResponse boardResponse = BoardResponse.builder()
+                .boardId(board.getId())
+                .userId(board.getUser().getId())
                 .title(board.getTitle())
                 .content(board.getContent())
                 .writer(board.getWriter())
                 .likes(board.getLikes())
                 .createdDate(String.valueOf(board.getCreatedDate()))
-                .replyList(board.getReplyList())
+                .replyList(replylist)
                 .build();
         return boardResponse;
     }
@@ -84,14 +89,7 @@ public class BoardService {
         List<Board> boardList = boardRepository.findAll();
         List<BoardResponse> result = new ArrayList<>();
         boardList.forEach(v->{
-            result.add(BoardResponse.builder()
-                            .title(v.getTitle())
-                            .content(v.getContent())
-                            .writer(v.getWriter())
-                            .likes(v.getLikes())
-                            .createdDate(String.valueOf(v.getCreatedDate()))
-                            .replyList(v.getReplyList())
-                    .build());
+            result.add(select(v.getId()));
         });
         return result;
     }
