@@ -30,14 +30,15 @@ public class Board extends BaseTimeEntity {
     private String picture;
     @Column(name = "likes")
     private int likes;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "board_like_id")
-    private BoardLike boardLike;
+
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @OrderBy("id asc") // 댓글 정렬
     private List<Reply> replyList;
 
-    public void setBoardLike(BoardLike boardLike) {
-        this.boardLike = boardLike;
+    public void deletelike(){
+        this.likes-=1;
+    }
+    public void addlike() {
+        this.likes += 1;
     }
 }

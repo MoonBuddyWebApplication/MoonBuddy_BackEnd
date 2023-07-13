@@ -39,7 +39,6 @@ public class BoardService {
                 .user(user)
                 .writer(boardWrite.getWriter())
                 .picture(null)
-                .boardLike(null)
                 .replyList(null)
                 .build();
         boardRepository.save(board);
@@ -95,5 +94,27 @@ public class BoardService {
                     .build());
         });
         return result;
+    }
+
+    public String like(Long id) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("존재하지 않는 게시글입니다."));
+        User user = userRepository.findById(2L)
+                .orElseThrow(()-> new RuntimeException("존재하지 않는 사용자입니다."));
+        BoardLike boardLike = boardLikeRepository.findByBoardIdAndUserId(board.getId(), 2L);
+        if(boardLike !=  null) {
+            board.deletelike();
+            boardLikeRepository.delete(boardLike);
+        }
+        else{
+            boardLike = BoardLike.builder()
+                    .board(board)
+                    .user(user)
+                    .build();
+            boardLikeRepository.save(boardLike);
+            board.addlike();
+        }
+
+        return "SUCCESS";
     }
 }
