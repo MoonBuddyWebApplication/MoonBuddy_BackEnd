@@ -2,28 +2,51 @@ package com.project.moonbuddy.board;
 
 import com.project.moonbuddy.board.dto.request.BoardWrite;
 import com.project.moonbuddy.board.dto.response.BoardResponse;
+import com.project.moonbuddy.user.User;
+import com.project.moonbuddy.user.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
+@Slf4j
+@Transactional
 @Service
 public class BoardService {
 
     private BoardRepository boardRepository;
+    private UserRepository userRepository;
+    private BoardLikeRepository boardLikeRepository;
 
+    @Autowired
+    public BoardService(BoardRepository boardRepository, UserRepository userRepository, BoardLikeRepository boardLikeRepository){
+        this.boardRepository = boardRepository;
+        this.userRepository = userRepository;
+        this.boardLikeRepository = boardLikeRepository;
+    }
     public String register(BoardWrite boardWrite) {
+        User user = userRepository.findById(2L)
+                .orElseThrow(()-> new RuntimeException("존재하지 않는 사용자입니다."));
+
         Board board = Board.builder()
                 .title(boardWrite.getTitle())
                 .content(boardWrite.getContent())
-                .userSn(1L)
-                .userName("김채원")
+                .user(user)
+                .writer(boardWrite.getWriter())
+                .picture(null)
+                .boardLike(null)
+                .replyList(null)
                 .build();
         boardRepository.save(board);
+
         return "SUCCESS";
     }
+
 
     public String delete(Long id) {
         Board board = boardRepository.findById(id)
@@ -50,7 +73,10 @@ public class BoardService {
         BoardResponse boardResponse = BoardResponse.builder()
                 .title(board.getTitle())
                 .content(board.getContent())
-                .userName(board.getUserName())
+                .writer(board.getWriter())
+                .likes(board.getLikes())
+                .createdDate(String.valueOf(board.getCreatedDate()))
+                .replyList(board.getReplyList())
                 .build();
         return boardResponse;
     }
@@ -62,7 +88,10 @@ public class BoardService {
             result.add(BoardResponse.builder()
                             .title(v.getTitle())
                             .content(v.getContent())
-                            .userName(v.getUserName())
+                            .writer(v.getWriter())
+                            .likes(v.getLikes())
+                            .createdDate(String.valueOf(v.getCreatedDate()))
+                            .replyList(v.getReplyList())
                     .build());
         });
         return result;

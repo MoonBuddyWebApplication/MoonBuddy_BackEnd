@@ -3,6 +3,7 @@ package com.project.moonbuddy.board;
 import com.project.moonbuddy.board.dto.request.BoardWrite;
 import com.project.moonbuddy.board.dto.response.BoardResponse;
 import com.project.moonbuddy.user.UserService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,25 +15,13 @@ import java.util.List;
 
 @Slf4j
 @CrossOrigin(origins = "http://172.16.65.251:3000")
+@AllArgsConstructor
 @RestController
 @RequestMapping("/board")
 public class BoardController {
     private final BoardService boardService;
 
-    private final UserService userService;
     private HttpSession httpSession;
-
-    @GetMapping("/test")
-    public String main(){
-
-        return "test";
-    }
-
-    @Autowired
-    public BoardController(BoardService boardService, UserService userService) {
-        this.boardService = boardService;
-        this.userService = userService;
-    }
 
     @GetMapping("/viewAll")
     public ResponseEntity viewAll(){
