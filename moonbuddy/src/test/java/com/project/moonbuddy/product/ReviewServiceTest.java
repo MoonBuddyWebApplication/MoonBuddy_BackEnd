@@ -39,11 +39,11 @@ public class ReviewServiceTest {
     public void testPost() {
 //        // Arrange
         Long productId = 1L;
-        Long userId = 2L;
+        Long userId = 1L;
         String reviewContent = "Sample review content";
 
-        Product product = new Product();
-        User user = new User();
+        Product product = new Product(1L, "Product 1", "Category 1", "Brand 1", "2023-10-30", "Description 1", "Picture 1", 0.75, 0.9, 0.8, 0.9, 50.0,null);
+        User user = new User("mk","23","mk",null);
 
         when(productRepository.findById(productId)).thenReturn(Optional.of(product));
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));  // findByEmail 메서드 사용

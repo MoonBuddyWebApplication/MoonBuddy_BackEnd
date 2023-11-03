@@ -16,14 +16,13 @@ public class ReviewDTO {
         private Long productId;
         private String reviewcommnet;
 
-        public Review toEntity(User user, Product product,String reviewcommnet) {
+        public Review toEntity(User user, Product product) {
             Review review = Review.builder()
                     .user(user)
                     .product(product)
                     .reviewContetent(reviewcommnet)
                     .build();
             return review;
-
 
         }
 

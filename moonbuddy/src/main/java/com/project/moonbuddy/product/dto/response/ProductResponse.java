@@ -9,7 +9,6 @@ import java.util.List;
 @Builder
 @Data
 public class ProductResponse {
-    private long id;
     private long product_id;
     private String name;
     private String category;

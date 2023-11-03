@@ -29,7 +29,7 @@ public class ReviewService {
                 .orElseThrow(()-> new RuntimeException("존재하지 않는 상품입니다."));
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(()-> new RuntimeException("존재하지 않는 사용자입니다."));
-        Review review = request.toEntity(user,product,request.getReviewcommnet());
+        Review review = request.toEntity(user,product);
         reviewRepository.save(review);
         return "SUCCESS";
     }
