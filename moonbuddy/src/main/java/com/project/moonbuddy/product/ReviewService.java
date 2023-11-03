@@ -24,11 +24,12 @@ public class ReviewService {
 
 
     public String post(ReviewDTO.Request request) {
+
         Product product = productRepository.findById(request.getProductId())
                 .orElseThrow(()-> new RuntimeException("존재하지 않는 상품입니다."));
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(()-> new RuntimeException("존재하지 않는 사용자입니다."));
-        Review review = request.toEntity(user,product);
+        Review review = request.toEntity(user,product,request.getReviewcommnet());
         reviewRepository.save(review);
         return "SUCCESS";
     }

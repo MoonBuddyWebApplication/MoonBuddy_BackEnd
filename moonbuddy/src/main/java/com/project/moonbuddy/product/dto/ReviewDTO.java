@@ -16,7 +16,7 @@ public class ReviewDTO {
         private Long productId;
         private String reviewcommnet;
 
-        public Review toEntity(User user, Product product) {
+        public Review toEntity(User user, Product product,String reviewcommnet) {
             Review review = Review.builder()
                     .user(user)
                     .product(product)
@@ -33,7 +33,7 @@ public class ReviewDTO {
     @Getter
     public static class Response {
         private Long replyId;
-        private String reveiwcomment;
+        private String reviewcomment;
         private String createDate;
         private String nickname;
         private Long userId;
@@ -43,8 +43,9 @@ public class ReviewDTO {
             this.replyId=review.getId();
             this.productId=review.getProduct().getId();
             this.nickname=review.getUser().getName();
-            this.reveiwcomment=review.getReviewContetent();
-
+            this.userId=review.getUser().getId();
+            this.reviewcomment=review.getReviewContetent();
+            this.createDate=review.getCreatedDate().toString();
         }
 
 

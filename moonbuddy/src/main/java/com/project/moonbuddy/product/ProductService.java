@@ -29,10 +29,10 @@ public class ProductService {
     public ProductResponse select(Long id){
         Product product=productRepository.findById(id).orElseThrow(()->new RuntimeException("존재하지 않는 상품입니다."));
         List<ReviewDTO.Response> reviewlist=new ArrayList<>();
-//        product.getReveiwList().forEach(v->
-//                reviewlist.add(new ReviewDTO.Response(v)));
+        product.getReviewList().forEach(v->
+                reviewlist.add(new ReviewDTO.Response(v)));
         ProductResponse productResponse=ProductResponse.builder()
-                .id(product.getId())
+                .product_id(product.getId())
                 .name(product.getName())
                 .category(product.getCategory())
                 .brand(product.getBrand())
