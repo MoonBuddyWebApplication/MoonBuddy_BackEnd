@@ -22,13 +22,11 @@ public class ProductService {
     public ProductService(ProductRepository productRepository) {
             this.productRepository=productRepository;
 
-
-
     }
 
     public ProductResponse select(Long id){
         Product product=productRepository.findById(id).orElseThrow(()->new RuntimeException("존재하지 않는 상품입니다."));
-        List<ReviewDTO.Response> reviewlist=new ArrayList<>();
+        List<ReviewDTO.Response> reviewlist = new ArrayList<>();
         product.getReviewList().forEach(v->
                 reviewlist.add(new ReviewDTO.Response(v)));
         ProductResponse productResponse=ProductResponse.builder()
@@ -46,7 +44,6 @@ public class ProductService {
                 .price(product.getPrice())
                 .reviewList(reviewlist)
                 .build();
-
 
     return productResponse;
     }
