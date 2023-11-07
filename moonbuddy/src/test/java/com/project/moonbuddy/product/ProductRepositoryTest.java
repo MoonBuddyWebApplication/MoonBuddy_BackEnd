@@ -25,8 +25,8 @@ public class ProductRepositoryTest {
 
         // Review 객체 생성 및 목록에 추가
 
-        Product product1 = new Product(1L, "Product 1", "Category 1", "Brand 1", "2023-10-30", "Description 1", "Picture 1", 0.75, 0.9, 0.8, 0.9, 50.0);
-        Product product2 = new Product(2L, "Product 2", "Category 2", "Brand 2", "2023-10-31", "Description 2", "Picture 2", 0.8, 0.85, 0.75, 0.8, 45.0);
+        Product product1 = new Product(1L, "Product 1", "Category 1", "Brand 1", "2023-10-30", "Description 1", "Picture 1", 0.75, 0.9, 0.8, 0.9, 50.0,null);
+        Product product2 = new Product(2L, "Product 2", "Category 2", "Brand 2", "2023-10-31", "Description 2", "Picture 2", 0.8, 0.85, 0.75, 0.8, 45.0,null);
         productRepository.save(product1);
         productRepository.save(product2);
 
@@ -44,7 +44,7 @@ public class ProductRepositoryTest {
     @Test
     public void testFindProductById() {
         // Create and save a sample product
-        Product product = new Product(1L, "Product 1", "Category 1", "Brand 1", "2023-10-30", "Description 1", "Picture 1", 0.75, 0.9, 0.8, 0.9, 50.0);
+        Product product = new Product(1L, "Product 1", "Category 1", "Brand 1", "2023-10-30", "Description 1", "Picture 1", 0.75, 0.9, 0.8, 0.9, 50.0,null);
         productRepository.save(product);
 
         Product retrievedProduct = productRepository.findByName("Product 1").orElse(null);

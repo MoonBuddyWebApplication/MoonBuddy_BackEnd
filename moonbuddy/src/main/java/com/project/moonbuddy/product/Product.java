@@ -42,10 +42,13 @@ public class Product {
     @Column(name = "price", nullable = false)
     private double price;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @OrderBy("id asc") // 후기 정렬
     private List<Review> reviewList;
 
-
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OrderBy("id asc") // 후기 정렬
+    private List<Mark> markList;
 
 }

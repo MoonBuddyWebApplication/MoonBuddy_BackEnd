@@ -29,6 +29,10 @@ public class ProductService {
         List<ReviewDTO.Response> reviewlist = new ArrayList<>();
         product.getReviewList().forEach(v->
                 reviewlist.add(new ReviewDTO.Response(v)));
+        List<Mark> marklist = new ArrayList<>();
+        product.getMarkList().forEach(v->
+                marklist.add(new Mark()));
+
         ProductResponse productResponse=ProductResponse.builder()
                 .product_id(product.getId())
                 .name(product.getName())
@@ -43,6 +47,7 @@ public class ProductService {
                 .safety(product.getSafety())
                 .price(product.getPrice())
                 .reviewList(reviewlist)
+                .markList(marklist)
                 .build();
 
     return productResponse;

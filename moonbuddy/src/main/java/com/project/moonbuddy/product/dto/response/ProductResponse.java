@@ -1,5 +1,6 @@
 package com.project.moonbuddy.product.dto.response;
 
+import com.project.moonbuddy.product.Mark;
 import com.project.moonbuddy.product.dto.ReviewDTO;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class ProductResponse {
     private  double safety;
     private double price;
     private List<ReviewDTO.Response> reviewList;
+    private List<Mark> markList;
 
 
 }
