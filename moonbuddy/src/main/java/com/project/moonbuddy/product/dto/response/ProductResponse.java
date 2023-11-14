@@ -22,6 +22,7 @@ public class ProductResponse {
     private double satisfaction;
     private  double safety;
     private double price;
+    private String image;
     private List<ReviewDTO.Response> reviewList;
     private List<Mark> markList;
 

@@ -41,7 +41,8 @@ public class Product {
     private double safety;
     @Column(name = "price", nullable = false)
     private double price;
-
+    @Column(name="image")
+    private String image;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @OrderBy("id asc") // 후기 정렬

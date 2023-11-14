@@ -48,6 +48,7 @@ public class ProductService {
                 .price(product.getPrice())
                 .reviewList(reviewlist)
                 .markList(marklist)
+                .image(product.getImage())
                 .build();
 
     return productResponse;
